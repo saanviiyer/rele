@@ -33,6 +33,7 @@ export default function App() {
   const [n, setN] = useState(fromHash);
   const [sources, setSources] = useState(false);
   const [about, setAbout] = useState(false);
+  const [menu, setMenu] = useState(false);
   const theme = useTheme();
   useEffect(() => { try { history.replaceState(null, '', `${location.pathname}${location.search}#${n}`); } catch { /* ignore */ } }, [n]);
   useEffect(() => {
@@ -44,17 +45,34 @@ export default function App() {
   const Body = ch.Body;
   return (
     <div className="flex h-full flex-col">
-      <header className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-line px-4 py-2">
-        <button onClick={() => setAbout(true)} className="text-left text-sm" title="About this project"><Title /></button>
-        <nav className="flex flex-1 flex-wrap gap-1">
-          {CHAPTERS.map((c, i) => (
-            <button key={c.name} onClick={() => setN(i + 1)} title={c.source}
-              className={`rounded px-2 py-1 text-xs ${n === i + 1 ? 'bg-glow/15 text-glow' : 'text-dim hover:text-slate-200'}`}>
-              {i + 1}. {c.name}
-            </button>
-          ))}
-        </nav>
-        <div className="flex items-center gap-3 text-xs">
+      <header className="flex items-center gap-3 border-b border-line px-4 py-2">
+        <button onClick={() => setAbout(true)} className="shrink-0 text-left text-sm" title="About this project"><Title /></button>
+        <div className="relative flex flex-1 items-center gap-3">
+          <button onClick={() => setMenu((m) => !m)} aria-expanded={menu}
+            className="flex items-center gap-2 rounded-md border border-line bg-panel px-3 py-1 text-xs hover:border-glow/40">
+            <span className="text-dim">Chapter {n} of {CHAPTERS.length}</span>
+            <span className="text-slate-100">{ch.name}</span>
+            <span className="text-dim">{menu ? '▴' : '▾'}</span>
+          </button>
+          <div className="hidden h-1 w-32 overflow-hidden rounded-full bg-line sm:block" title={`Chapter ${n} of ${CHAPTERS.length}`}>
+            <div className="h-full rounded-full bg-glow transition-[width] duration-300" style={{ width: `${(n / CHAPTERS.length) * 100}%` }} />
+          </div>
+          {menu && (
+            <>
+              <div className="fixed inset-0 z-40" onClick={() => setMenu(false)} />
+              <div className="absolute left-0 top-9 z-50 max-h-[72vh] w-72 overflow-y-auto rounded-lg border border-line bg-panel p-1 shadow-xl">
+                <div className="px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-dim">Chapters</div>
+                {CHAPTERS.map((c, i) => (
+                  <button key={c.name} onClick={() => { setN(i + 1); setMenu(false); }} title={c.source}
+                    className={`block w-full rounded px-3 py-1.5 text-left text-xs ${n === i + 1 ? 'bg-glow/15 text-glow' : 'text-slate-300 hover:bg-line/50'}`}>
+                    {i + 1}. {c.name}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+        <div className="flex shrink-0 items-center gap-3 text-xs">
           <button className="text-glow/80 hover:text-glow" onClick={() => setAbout(true)}>About</button>
           <button className="text-glow/80 hover:text-glow" onClick={() => setSources(true)}>Sources</button>
           <button className="rounded-md border border-line bg-panel px-2 py-0.5 text-slate-300 hover:border-glow/40" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} title="switch between the light and dark themes">
