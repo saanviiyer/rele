@@ -84,7 +84,7 @@ export default function App() {
       <main className="flex min-h-0 flex-1 flex-col overflow-y-auto lg:flex-row lg:overflow-hidden">
         <aside className="scroll-thin w-full shrink-0 space-y-3 border-line p-4 lg:w-80 lg:overflow-y-auto lg:border-r">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-dim">Chapter {n} · {ch.name}</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-dim">Chapter {n}, {ch.name}</p>
             <p className="mt-2 text-sm leading-relaxed text-slate-100">{ch.intro}</p>
           </div>
           <div className="rounded-lg border border-line p-3 text-xs leading-relaxed text-slate-300">
@@ -104,7 +104,9 @@ export default function App() {
           </div>
         </aside>
         <section className="scroll-thin min-w-0 flex-1 p-4 lg:overflow-y-auto">
-          <Boundary key={n}><Body /></Boundary>
+          <div className="mx-auto max-w-3xl">
+            <Boundary key={n}><Body /></Boundary>
+          </div>
         </section>
       </main>
       <footer className="border-t border-line px-4 py-1.5 text-[10px] text-dim">

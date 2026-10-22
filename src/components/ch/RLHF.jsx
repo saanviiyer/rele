@@ -18,7 +18,7 @@ function Scatter({ lm, p, rm }) {
       ))}
       <text x={S - 10} y={H - 4} fontSize="9" textAnchor="end" fill="var(--color-dim)">true quality →</text>
       <text x="24" y="14" fontSize="9" fill="var(--color-dim)">↑ length</text>
-      {rm && <text x={S - 10} y="14" fontSize="9" textAnchor="end" fill="var(--color-dim)">r_φ = {rm.w[0].toFixed(1)}·quality + {rm.w[1].toFixed(1)}·length</text>}
+      {rm && <text x={S - 10} y="14" fontSize="9" textAnchor="end" fill="var(--color-dim)">r_φ = {rm.w[0].toFixed(1)}×quality + {rm.w[1].toFixed(1)}×length</text>}
     </svg>
   );
 }
@@ -78,8 +78,8 @@ function DPOCard({ lm, pairs, rm }) {
         <>
           <Chart series={[{ label: 'DPO loss', y: res.hist.map((h) => h.loss) }]} refLine={Math.log(2)} refLabel="log 2: the loss at π = π_ref" xLabel="every 20 steps" yLabel="loss" height={110} fmt={(v) => v.toFixed(4)} />
           <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-300">
-            <div className="rounded border border-line p-2"><div className="text-dim">DPO policy</div>quality {expect(res.pi, q).toFixed(3)} · length {expect(res.pi, len).toFixed(2)} · KL {kl(res.pi, lm.ref).toFixed(2)}</div>
-            <div className="rounded border border-line p-2"><div className="text-dim">RLHF optimum, same β</div>quality {expect(rlhf, q).toFixed(3)} · length {expect(rlhf, len).toFixed(2)} · KL {kl(rlhf, lm.ref).toFixed(2)}</div>
+            <div className="rounded border border-line p-2"><div className="text-dim">DPO policy</div>quality {expect(res.pi, q).toFixed(3)}, length {expect(res.pi, len).toFixed(2)}, KL {kl(res.pi, lm.ref).toFixed(2)}</div>
+            <div className="rounded border border-line p-2"><div className="text-dim">RLHF optimum, same β</div>quality {expect(rlhf, q).toFixed(3)}, length {expect(rlhf, len).toFixed(2)}, KL {kl(rlhf, lm.ref).toFixed(2)}</div>
           </div>
           <p className="text-[11px] text-slate-400">
             The loss starts at exactly log 2 ≈ 0.6931, since the policy and reference agree on every pair. After {(res.hist.length - 1) * 20} steps DPO has
@@ -103,7 +103,7 @@ export default function RLHF() {
   const pairs = useMemo(() => preferencePairs(lm), [lm]);
   const rm = useMemo(() => fitRewardModel(lm, pairs), [lm, pairs]);
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
+    <div className="grid gap-4">
       <RLHFCard lm={lm} pairs={pairs} rm={rm} />
       <DPOCard lm={lm} pairs={pairs} rm={rm} />
     </div>

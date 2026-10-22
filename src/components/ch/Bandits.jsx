@@ -154,7 +154,7 @@ function OneAgent() {
               {sp && <rect x={x - 3} y={Y(sp[1])} width="6" height={Math.max(1, Y(sp[0]) - Y(sp[1]))} fill="var(--color-cool)" opacity="0.35" />}
               {agentKey !== 'gradient' && <circle cx={x} cy={Y(est)} r="4" fill={sim.last?.a === a ? 'var(--color-warm)' : 'var(--color-glow)'} />}
               {pol && <rect x={x - 8} y={100 - pol[a] * 90} width="16" height={pol[a] * 90} fill={sim.last?.a === a ? 'var(--color-warm)' : 'var(--color-glow)'} opacity="0.6" />}
-              <text x={x} y="116" fontSize="9" textAnchor="middle" fill="var(--color-dim)">{a + 1} · {sim.ag.N[a]}</text>
+              <text x={x} y="116" fontSize="9" textAnchor="middle" fill="var(--color-dim)">{a + 1}, {sim.ag.N[a]}</text>
             </g>
           );
         })}
@@ -169,7 +169,7 @@ function OneAgent() {
 
 export default function Bandits() {
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
+    <div className="grid gap-4">
       <YourTurn />
       <OneAgent />
       <Testbed />

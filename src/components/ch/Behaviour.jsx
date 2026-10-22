@@ -73,7 +73,7 @@ function Product() {
         {E.trajectories.map((t, i) => (
           <div key={i} className={`flex justify-between rounded px-1 ${t === drawn ? 'bg-warm/15' : ''}`}>
             <span>{t.steps.map((s) => `s${s.s}a${s.a}`).join(' ')}</span>
-            <span>p {t.prob.toFixed(3)} · R {t.ret}</span>
+            <span>p {t.prob.toFixed(3)}, R {t.ret}</span>
           </div>
         ))}
       </div>
@@ -157,7 +157,7 @@ function Markov() {
 
 export default function Behaviour() {
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
+    <div className="grid gap-4">
       <Examples />
       <Product />
       <Loop />

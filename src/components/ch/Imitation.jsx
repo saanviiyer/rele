@@ -111,7 +111,7 @@ function Dagger() {
 
 export default function Imitation() {
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
+    <div className="grid gap-4">
       <Multimodal />
       <Dagger />
     </div>

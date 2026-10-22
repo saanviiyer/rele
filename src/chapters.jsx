@@ -115,7 +115,7 @@ export const CHAPTERS = [
     intro: <>Post-training a language model: learn a reward from human preferences, then optimize it without drifting too far from the original model.</>,
     sources: <>{L(9, 'RLHF and DPO.')} {N('sections 5-6: reward models and DPO.')} InstructGPT<Cite id="ouyang2022" />, DPO<Cite id="rafailov2023" />, and reward-model over-optimisation.<Cite id="gao2023" /></>,
     notation: <>Prompt x, response y, reference π_ref, reward model r_φ, preferred y_w and dispreferred y_l. Lecture 9 writes p^PT, p^RL_θ and RM_φ for the same things.</>,
-    takeaway: <>The KL-regularised objective has a closed-form optimum, π_ref · exp(r/β) / Z. Push β too low and the policy exploits the reward model's errors: the learned reward keeps rising while true quality falls. DPO fits the same optimum directly from preferences.</>,
+    takeaway: <>The KL-regularised objective has a closed-form optimum, π_ref × exp(r/β) / Z. Push β too low and the policy exploits the reward model's errors: the learned reward keeps rising while true quality falls. DPO fits the same optimum directly from preferences.</>,
   },
   {
     name: 'GRPO and DAPO',

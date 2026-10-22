@@ -135,7 +135,7 @@ function ClipHigher() {
 
 export default function GRPO() {
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
+    <div className="grid gap-4">
       <Advantages />
       <LengthBias />
       <Difficulty />

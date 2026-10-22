@@ -57,7 +57,7 @@ export default function Planning() {
   const bestA = terms ? terms.reduce((m, x) => (x.q > m.q ? x : m)) : null;
 
   return (
-    <div className="grid gap-4 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+    <div className="grid gap-4">
       <Card title="Value iteration on a world you can edit">
         <div className="flex flex-wrap items-center gap-1">
           <Select label="world" value={preset} set={loadPreset} options={Object.entries(PRESETS).filter(([k]) => k !== 'corridor').map(([k, p]) => [k, p.label])} />

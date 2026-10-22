@@ -165,7 +165,7 @@ function Expectile() {
 
 export default function Offline() {
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
+    <div className="grid gap-4">
       <Stitching />
       <OOD />
       <GridOffline />

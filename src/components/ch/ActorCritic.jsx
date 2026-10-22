@@ -148,7 +148,7 @@ function LambdaSweep() {
 
 export default function ActorCritic() {
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
+    <div className="grid gap-4">
       <RandomWalk />
       <div className="space-y-4"><Spread /><Predictor /></div>
       <GAECalc />
